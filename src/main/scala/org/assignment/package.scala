@@ -6,7 +6,7 @@ import scala.language.postfixOps
 
 package object assignment {
 
-  sealed trait HasUrl {
+  sealed trait HasUrl extends Ordered[HasUrl] {
 
     import RegularExpressions._
 
@@ -18,7 +18,12 @@ package object assignment {
 
     }
 
+    lazy val firstDomainLetter = domain(0)
+
     def url: String
+
+    def compare(that: HasUrl): Int = (this firstDomainLetter) compare (that firstDomainLetter)
+
 
   }
 

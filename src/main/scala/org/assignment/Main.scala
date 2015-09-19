@@ -7,6 +7,7 @@ import com.typesafe.config.ConfigFactory
 import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext}
 import scala.language.postfixOps
+import scala.util.{Failure, Success, Try}
 
 object Main extends App {
 
@@ -32,14 +33,22 @@ object Main extends App {
     case other => throw new IllegalArgumentException(s"unknown mode $other")
   }
 
-  val list = Await result(Assignment(url, requestCount) execute(httpTimeout, mode), executionDuration) sortBy (value => (value domain)(0))
+  Try {
 
-  println({
-    if (printFailed)
-      list
-    else
-      list filter (value => (value isInstanceOf)[OK])
-  } mkString "\n")
+    val list = Await result(Assignment(url, requestCount) execute(httpTimeout, mode), executionDuration)
 
-  sys exit 0
+    println({
+      if (printFailed)
+        list
+      else
+        list filter (value => (value isInstanceOf)[OK])
+    } mkString "\n")
+
+  } match {
+    case Success(unit) =>
+      sys exit 0
+    case Failure(thr) =>
+      println(thr)
+      sys exit -1
+  }
 }
