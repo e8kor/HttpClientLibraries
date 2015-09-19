@@ -22,7 +22,9 @@ package object assignment {
 
     def url: String
 
-    def compare(that: HasUrl): Int = (this firstDomainLetter) compare (that firstDomainLetter)
+    def compare(that: HasUrl): Int = {
+      (this firstDomainLetter) compare (that firstDomainLetter)
+    }
 
 
   }
@@ -98,9 +100,9 @@ package object assignment {
 
   object RegularExpressions {
 
-    lazy val domainRegex = """(?:https?://)?(?:www\.)?([A-Za-z0-9._%+-]+)/?.*""" r
+    lazy val domainRegex = """(\w*?\.\w{2,5})(\/|\s|$)|(.com)""" r
 
-    lazy val urlsRegex = """(http|ftp|https)://([\w+?\.\w+])+([a-zA-Z0-9\~\!\@\#\$\%\^\&\*\(\)_\-\=\+\\\/\?\.\:\;\'\,]*)?""" r
+    lazy val urlsRegex = """http://([\w+?\.\w+])+([a-zA-Z0-9\~\!\@\#\$\%\^\&\*\(\)_\-\=\+\\\/\?\.\:\;\'\,]*)?""" r
 
   }
 

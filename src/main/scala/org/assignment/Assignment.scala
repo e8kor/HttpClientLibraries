@@ -5,11 +5,11 @@ import scala.concurrent.{ExecutionContext, Future}
 
 case class Assignment(randomiseURL: String, count: Int) {
 
-  def execute[T](timeout: Int, mode: Modes.Mode[T])(implicit executionContext: ExecutionContext): Future[List[HasUrl]] = {
+  def execute[T](timeout: Int, mode: Modes.Mode[T])(implicit executionContext: ExecutionContext): Future[Seq[HasUrl]] = {
 
     import mode.{query, toHttpOps}
 
-    (Future traverse (List fill count)(randomiseURL) ) {
+    (Future traverse (Seq fill count)(randomiseURL) ) {
       url =>
         query(timeout)(url) map (value => toHttpOps(value) redirectURL()) flatMap {
           target =>

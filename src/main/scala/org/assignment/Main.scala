@@ -35,14 +35,11 @@ object Main extends App {
 
   Try {
 
-    val list = Await result(Assignment(url, requestCount) execute(httpTimeout, mode), executionDuration)
+    val futures = Assignment(url, requestCount) execute(httpTimeout, mode)
+    val list = Await result(futures, executionDuration)
+    val toPrint = if (printFailed) list else list filter (value => (value isInstanceOf)[OK])
 
-    println({
-      if (printFailed)
-        list
-      else
-        list filter (value => (value isInstanceOf)[OK])
-    } mkString "\n")
+    println((toPrint sorted) mkString "\n")
 
   } match {
     case Success(unit) =>
