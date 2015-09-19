@@ -25,12 +25,12 @@ buildInfoKeys := Seq(name, version, scalaVersion, sbtVersion)
 buildInfoPackage := s"${organization value}.${name value}.info"
 
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-actor" % "2.4-M3" withSources(),
-  "com.typesafe.akka" %% "akka-testkit" % "2.4-M3" % "test" withSources(),
-  "org.scalatest" %% "scalatest" % "2.2.5" % "test" withSources(),
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0" withSources(),
   "com.typesafe" % "config" % "1.2.0" withSources(),
-  "org.scala-lang" % "scala-reflect" % scalaVersion.value % "provided" withSources(),
-  "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0" withSources()
+  "org.scalatest" %% "scalatest" % "2.2.5" % "test" withSources(),
+  "org.scalaj" %% "scalaj-http" % "1.1.5" withSources(),
+  "net.databinder.dispatch" %% "dispatch-core" % "0.11.2" withSources(),
+  "ch.qos.logback" % "logback-classic" % "1.1.3" withSources()
 )
 
 maintainer in Universal := "IEvgenii Korniichuk <nutscracker.ua@gmail.com>"
@@ -41,6 +41,6 @@ wixProductUpgradeId := "4552fb0e-e257-4dbd-9ecb-dba9dbacf424"
 
 scriptClasspath ++= Seq("../conf", "../scripts")
 
-mainClass in Compile := Some("org.system.Main")
+mainClass in Compile := Some("org.assignment.Main")
 
 
