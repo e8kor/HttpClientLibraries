@@ -1,2 +1,2 @@
-# Assignment
-Interview assignment
+# HttpClientLibraries
+Testing scalaj-http library abd dispatch-core
